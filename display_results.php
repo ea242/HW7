@@ -1,6 +1,12 @@
 <?php
     // get the data from the form
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING ,FILTER_VALIDATE_EMAIL);
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $heard = filter_input(INPUT_POST, 'heard_from', FILTER_SANITIZE_STRING);
+    $updates = filter_input(INPUT_POST, 'wants_updates', FILTER_VALIDATE_BOOLEAN);
+    $contact = filter_input(INPUT_POST, 'contact_via', FILTER_SANITIZE_STRING);
+    $comments = filter_input(INPUT_POST, 'comments', FILTER_SANITIZE_STRING);
 
     // get the rest of the data for the form
 
@@ -24,22 +30,22 @@
         <span><?php echo htmlspecialchars($email); ?></span><br>
 
         <label>Password:</label>
-        <span><!-- add PHP code here--></span><br>
+        <span><?php echo htmlspecialchars($password); ?></span><br>
 
         <label>Phone Number:</label>
-        <span></span><br>
+        <span><?php echo htmlspecialchars($phone); ?></span><br>
 
         <label>Heard From:</label>
-        <span></span><br>
+        <span><?php if($heard){echo htmlspecialchars($heard);}else{echo "Unknown";} ?></span><br>
 
         <label>Send Updates:</label>
-        <span></span><br>
+        <span><?php if($updates){echo "Yes";}else{echo "No";} ?></span><br>
 
         <label>Contact Via:</label>
-        <span></span><br><br>
+        <span><?php echo htmlspecialchars($contact); ?></span><br><br>
 
         <span>Comments:</span><br>
-        <span></span><br>        
+        <span><?php echo nl2br(htmlspecialchars($comments)); ?></span><br>        
     </main>
 </body>
 </html>
